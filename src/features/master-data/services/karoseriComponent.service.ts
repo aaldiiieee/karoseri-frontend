@@ -5,7 +5,7 @@ import type {
   ComponentUpdate,
   ComponentList,
   ComponentFilters,
-} from "../types/karoseriComponent.types";
+} from "../types/karoseriComponent.type";
 
 // Response transformer
 const transformComponent = (data: any): Component => ({

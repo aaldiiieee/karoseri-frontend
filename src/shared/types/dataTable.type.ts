@@ -33,4 +33,15 @@ export interface DataTableProps<T> {
   emptyMessage?: string;
   /** Mobile card render (optional, for custom mobile view) */
   renderMobileCard?: (item: T, actions: Action<T>[]) => React.ReactNode;
+  navigateToAdd?: string;
+  title: string;
+}
+
+export interface DataTableSkeletonProps {
+  /** Number of columns */
+  columns?: number;
+  /** Number of rows */
+  rows?: number;
+  /** Show actions column */
+  hasActions?: boolean;
 }

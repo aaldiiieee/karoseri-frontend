@@ -1,6 +1,7 @@
 import type { RouteObject } from "react-router";
 import { MainLayout } from "@/shared/layouts/MainLayout";
-import { KaroseriComponentView } from "./views/KaroseriComponentView";
+import { KaroseriComponentListView } from "./views/KaroseriComponentListView";
+import { DamageRecordListView } from "./views/DamageRecordListView";
 
 export const MasterDataRoutes: RouteObject[] = [
   {
@@ -9,7 +10,11 @@ export const MasterDataRoutes: RouteObject[] = [
     children: [
       {
         path: "component",
-        Component: KaroseriComponentView,
+        Component: KaroseriComponentListView,
+      },
+      {
+        path: "damage-record",
+        Component: DamageRecordListView,
       },
     ],
   },

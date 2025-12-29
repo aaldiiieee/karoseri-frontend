@@ -4,7 +4,7 @@ import type {
   ComponentCreate,
   ComponentUpdate,
   ComponentFilters,
-} from "../types/karoseriComponent.types";
+} from "../types/karoseriComponent.type";
 
 export const componentKeys = {
   all: ["components"] as const,

@@ -1,5 +1,7 @@
 import { Menu, Bell, Search, Sun, Moon } from "lucide-react";
 import { useTheme } from "@/shared/hooks/useTheme";
+import { Link } from "react-router";
+import CompanyLogo from "/images/logo-karoseri.png";
 
 interface NavbarProps {
   onMenuClick?: () => void;
@@ -22,10 +24,14 @@ export const Navbar = ({ onMenuClick }: NavbarProps) => {
         </button>
 
         {/* Title */}
-        <span className="text-lg font-semibold">
+        {/* <span className="text-lg font-semibold">
           Karoseri Damage Classification
-        </span>
+        </span> */}
       </div>
+
+      <Link to="/dashboard" className="md:hidden">
+        <img src={CompanyLogo} alt="Logo" className="w-16" />
+      </Link>
 
       {/* Right Section */}
       <div className="flex items-center gap-2">

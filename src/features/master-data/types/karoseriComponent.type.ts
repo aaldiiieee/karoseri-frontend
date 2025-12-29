@@ -40,3 +40,8 @@ export interface ComponentFilters {
   isActive?: boolean;
   search?: string;
 }
+
+export interface ActionHandlers {
+  onEdit: (item: Component) => void;
+  onDelete: (item: Component) => void;
+}
