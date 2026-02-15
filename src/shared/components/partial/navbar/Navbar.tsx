@@ -1,4 +1,4 @@
-import { Menu, Bell, Search, Sun, Moon } from "lucide-react";
+import { Menu, Sun, Moon } from "lucide-react";
 import { useTheme } from "@/shared/hooks/useTheme";
 import { Link } from "react-router";
 import CompanyLogo from "/images/logo-karoseri.png";
@@ -12,9 +12,7 @@ export const Navbar = ({ onMenuClick }: NavbarProps) => {
 
   return (
     <header className="flex h-16 shrink-0 items-center justify-between border-b bg-card px-4 lg:px-6">
-      {/* Left Section */}
       <div className="flex items-center gap-3">
-        {/* Hamburger Menu - Mobile Only */}
         <button
           onClick={onMenuClick}
           className="flex h-10 w-10 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground lg:hidden"
@@ -23,35 +21,21 @@ export const Navbar = ({ onMenuClick }: NavbarProps) => {
           <Menu className="h-6 w-6" />
         </button>
 
-        {/* Title */}
-        {/* <span className="text-lg font-semibold">
-          Karoseri Damage Classification
-        </span> */}
+        <span className="text-lg font-semibold">
+          Klasifikasi Kerusakan Komponen
+        </span>
       </div>
 
       <Link to="/dashboard" className="md:hidden">
         <img src={CompanyLogo} alt="Logo" className="w-16" />
       </Link>
 
-      {/* Right Section */}
       <div className="flex items-center gap-2">
-        {/* Search - Hidden on mobile */}
-        <button className="hidden h-10 w-10 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground sm:flex">
-          <Search className="h-5 w-5" />
-        </button>
-
-        {/* Theme Toggle */}
         <button
           onClick={toggleTheme}
           className="flex h-10 w-10 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
         >
           {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-        </button>
-
-        {/* Notifications */}
-        <button className="relative flex h-10 w-10 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground">
-          <Bell className="h-5 w-5" />
-          <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-destructive" />
         </button>
       </div>
     </header>

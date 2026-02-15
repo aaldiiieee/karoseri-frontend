@@ -35,7 +35,7 @@ export interface DamageRecordCreate {
   notes?: string;
 }
 
-export interface DamageRecordUpdate extends Partial<DamageRecordCreate> {}
+export interface DamageRecordUpdate extends Partial<DamageRecordCreate> { }
 
 export interface DamageRecordList {
   items: DamageRecord[];
@@ -55,4 +55,10 @@ export interface DamageRecordFilters {
 export interface ActionHandlers {
   onEdit: (item: DamageRecord) => void;
   onDelete: (item: DamageRecord) => void;
+}
+
+export interface BulkImportResult {
+  successCount: number;
+  errorCount: number;
+  errors: string[];
 }

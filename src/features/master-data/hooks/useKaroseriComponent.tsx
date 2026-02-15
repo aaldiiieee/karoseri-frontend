@@ -16,10 +16,10 @@ export const componentKeys = {
   categories: () => [...componentKeys.all, "categories"] as const,
 };
 
-export const useComponents = () => {
+export const useComponents = (filters: ComponentFilters = {}) => {
   return useQuery({
-    queryKey: componentKeys.lists(),
-    queryFn: () => karoseriComponentService.getAll(),
+    queryKey: componentKeys.list(filters),
+    queryFn: () => karoseriComponentService.getAll(filters),
     staleTime: 1000 * 60 * 10, // 10 minutes
   });
 };
@@ -73,6 +73,18 @@ export const useDeleteComponent = () => {
     mutationFn: (id: string) => karoseriComponentService.delete(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: componentKeys.lists() });
+    },
+  });
+};
+
+export const useBulkImportComponent = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (file: File) => karoseriComponentService.bulkImport(file),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: componentKeys.lists() });
+      queryClient.invalidateQueries({ queryKey: componentKeys.categories() });
     },
   });
 };

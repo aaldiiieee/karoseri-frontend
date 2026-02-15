@@ -10,7 +10,7 @@ interface SidebarMobileProps {
   onClose: () => void;
   user?: {
     name: string;
-    email: string;
+    role: string;
     avatar?: string;
   };
   onLogout?: () => void;
@@ -40,7 +40,7 @@ export const SidebarMobile = ({
       >
         <div className="flex h-16 items-center justify-between border-b px-4">
           <Link to="/" className="text-xl font-bold" onClick={onClose}>
-            Karoseri
+            PT. Sukses Tunggal Mandiri
           </Link>
           <button onClick={onClose} className="rounded-lg p-2 hover:bg-accent">
             <X className="h-5 w-5" />

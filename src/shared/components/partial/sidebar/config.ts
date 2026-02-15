@@ -26,52 +26,52 @@ export const sidebarNav: NavGroup[] = [
     title: "Master Data",
     items: [
       {
-        title: "Component",
+        title: "Komponen",
         href: "/master-data/component",
         icon: Component,
       },
       {
-        title: "Damage Record",
+        title: "Data Kerusakan",
         href: "/master-data/damage-record",
         icon: ShieldAlert,
       },
     ],
   },
   {
-    title: "Analysis",
+    title: "Analisis",
     items: [
       {
-        title: "New Analysis",
+        title: "Klasifikasi Baru",
         href: "/analysis",
         icon: Upload,
       },
       {
-        title: "History",
+        title: "Riwayat",
         href: "/analysis/history",
         icon: History,
       },
       {
-        title: "Reports",
+        title: "Laporan",
         href: "/reports",
         icon: FileBarChart,
       },
     ],
   },
   {
-    title: "Settings",
+    title: "Pengaturan",
     items: [
       {
-        title: "Team",
+        title: "Tim",
         href: "/settings/team",
         icon: Users,
       },
       {
-        title: "Settings",
+        title: "Pengaturan",
         href: "/settings",
         icon: Settings,
       },
       {
-        title: "Help",
+        title: "Bantuan",
         href: "/help",
         icon: HelpCircle,
       },

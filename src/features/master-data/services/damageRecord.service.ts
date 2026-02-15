@@ -5,6 +5,7 @@ import type {
   DamageRecordUpdate,
   DamageRecordList,
   DamageRecordFilters,
+  BulkImportResult,
 } from "../types/damageRecord.type";
 
 // Response transformer
@@ -14,11 +15,11 @@ const transformDamageRecord = (data: any): DamageRecord => ({
   componentId: data.component_id,
   component: data.component
     ? {
-        id: data.component.id,
-        code: data.component.code,
-        name: data.component.name,
-        category: data.component.category,
-      }
+      id: data.component.id,
+      code: data.component.code,
+      name: data.component.name,
+      category: data.component.category,
+    }
     : undefined,
   damageArea: data.damage_area,
   damageDepth: data.damage_depth,
@@ -90,5 +91,32 @@ export const damageRecordService = {
 
   delete: async (id: string): Promise<void> => {
     await api.delete(`/damage-records/${id}`);
+  },
+
+  bulkImport: async (file: File): Promise<BulkImportResult> => {
+    const formData = new FormData();
+    formData.append("file", file);
+    const response = await api.post("/damage-records/bulk-import", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    return {
+      successCount: response.data.success_count,
+      errorCount: response.data.error_count,
+      errors: response.data.errors,
+    };
+  },
+
+  downloadTemplate: async (): Promise<void> => {
+    const response = await api.get("/damage-records/import-template", {
+      responseType: "blob",
+    });
+    const url = window.URL.createObjectURL(new Blob([response.data]));
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "template_data_kerusakan.xlsx";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.URL.revokeObjectURL(url);
   },
 };

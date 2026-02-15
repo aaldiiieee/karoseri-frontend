@@ -64,3 +64,14 @@ export const useDeleteDamageRecord = () => {
     },
   });
 };
+
+export const useBulkImportDamageRecord = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (file: File) => damageRecordService.bulkImport(file),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: damageRecordKeys.lists() });
+    },
+  });
+};

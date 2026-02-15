@@ -17,9 +17,9 @@ export const MainLayout = () => {
   const userData = user
     ? {
       name: user.username,
-      email: `${user.username}@karoseri.com`, // Pseudo email for now
+      role: user.role,
     }
-    : { name: "Guest", email: "guest@example.com" };
+    : { name: "Guest", role: "guest" };
 
   return (
     <div className="flex h-screen overflow-hidden">

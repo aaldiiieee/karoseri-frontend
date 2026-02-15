@@ -35,6 +35,18 @@ export interface DataTableProps<T> {
   renderMobileCard?: (item: T, actions: Action<T>[]) => React.ReactNode;
   navigateToAdd?: string;
   title: string;
+  /** Extra action buttons rendered in the header */
+  extraActions?: React.ReactNode;
+  pagination?: PaginationState;
+}
+
+export interface PaginationState {
+  page: number;
+  size: number;
+  total: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+  onSizeChange: (size: number) => void;
 }
 
 export interface DataTableSkeletonProps {

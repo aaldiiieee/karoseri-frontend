@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosError } from "axios";
-import { Factory, ShieldCheck } from "lucide-react";
+import { Factory } from "lucide-react";
 
 import { ApiError } from "@/shared/lib/api/error";
 import {
@@ -86,27 +86,18 @@ export function LoginView() {
 
           <div className="max-w-md space-y-6">
             <h1 className="text-4xl font-bold leading-tight tracking-tight text-white xl:text-5xl">
-              Sistem Analisis
+              Klasifikasi Kerusakan
               <br />
-              <span className="text-white/80">Kerusakan Karoseri</span>
+              <span className="text-white/80">Komponen Karoseri</span>
             </h1>
             <p className="text-base leading-relaxed text-white/60">
-              Platform cerdas untuk menganalisis, memprediksi, dan mengelola
-              tingkat kerusakan komponen karoseri secara akurat dan efisien.
+              Implementasi Metode Naive Bayes untuk klasifikasi tingkat
+              kerusakan komponen produksi karoseri pada PT. Sukses Tunggal Mandiri.
             </p>
-
-            {/* <div className="flex items-center gap-3 rounded-xl bg-white/10 px-4 py-3 backdrop-blur-sm">
-              <ShieldCheck className="h-5 w-5 shrink-0 text-emerald-300" />
-              <span className="text-sm text-white/70">
-                Data terenkripsi &amp; aman — akses terbatas untuk pengguna
-                terotorisasi
-              </span>
-            </div> */}
           </div>
 
-          {/* Footer */}
           <p className="text-xs text-white/30">
-            &copy; {new Date().getFullYear()} Karoseri Frontend. All rights
+            &copy; {new Date().getFullYear()} PT. Sukses Tunggal Mandiri. All rights
             reserved.
           </p>
         </div>
@@ -120,7 +111,7 @@ export function LoginView() {
             <Factory className="h-4 w-4 text-primary-foreground" />
           </div>
           <span className="text-base font-bold tracking-wide text-foreground">
-            Karoseri
+            PT. Sukses Tunggal Mandiri
           </span>
         </div>
 
@@ -149,7 +140,7 @@ export function LoginView() {
 
             {/* Footer note — mobile only */}
             <p className="text-center text-xs text-muted-foreground/60 lg:hidden">
-              &copy; {new Date().getFullYear()} Karoseri Frontend
+              &copy; {new Date().getFullYear()} PT. Sukses Tunggal Mandiri
             </p>
           </div>
         </div>

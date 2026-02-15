@@ -45,3 +45,9 @@ export interface ActionHandlers {
   onEdit: (item: Component) => void;
   onDelete: (item: Component) => void;
 }
+
+export interface ComponentBulkImportResult {
+  successCount: number;
+  errorCount: number;
+  errors: string[];
+}

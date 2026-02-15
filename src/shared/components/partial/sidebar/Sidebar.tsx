@@ -11,7 +11,7 @@ interface SidebarProps {
   onToggle?: () => void;
   user?: {
     name: string;
-    email: string;
+    role: string;
     avatar?: string;
   };
   onLogout?: () => void;

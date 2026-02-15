@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import { cn } from "@/shared/lib/utils";
 import type { DataTableProps } from "../types/dataTable.type";
 import { DataTableSkeleton } from "./DataTableSkeleton";
+import { DataTablePagination } from "./DataTablePagination";
 import { Button } from "./ui/button";
 import {
   Breadcrumb,
@@ -21,6 +22,8 @@ export function DataTable<T>({
   emptyMessage = "No data found",
   navigateToAdd,
   title,
+  extraActions,
+  pagination,
 }: DataTableProps<T>) {
   const navigate = useNavigate();
 
@@ -48,8 +51,13 @@ export function DataTable<T>({
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        {navigateToAdd && (
-          <Button onClick={() => navigate(navigateToAdd)}>Add {title}</Button>
+        {(extraActions || navigateToAdd) && (
+          <div className="flex items-center gap-2">
+            {extraActions}
+            {navigateToAdd && (
+              <Button onClick={() => navigate(navigateToAdd)}>Tambah {title}</Button>
+            )}
+          </div>
         )}
       </div>
       <div className="overflow-hidden rounded-lg border bg-card">
@@ -130,6 +138,8 @@ export function DataTable<T>({
           </table>
         </div>
       </div>
+
+      {pagination && <DataTablePagination state={pagination} />}
     </div>
   );
 }

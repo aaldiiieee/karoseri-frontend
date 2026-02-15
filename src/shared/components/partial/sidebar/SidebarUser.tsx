@@ -5,7 +5,7 @@ import { cn } from "@/shared/lib/utils";
 interface SidebarUserProps {
   user: {
     name: string;
-    email: string;
+    role: string;
     avatar?: string;
   };
   collapsed?: boolean;
@@ -68,7 +68,7 @@ export const SidebarUser = ({
 
         <div className="flex-1 text-left">
           <p className="text-sm font-medium">{user.name}</p>
-          <p className="truncate text-xs text-muted-foreground">{user.email}</p>
+          <p className="text-xs text-muted-foreground capitalize">{user.role}</p>
         </div>
 
         <ChevronUp
