@@ -17,7 +17,7 @@ export const sidebarNav: NavGroup[] = [
     items: [
       {
         title: "Dashboard",
-        href: "/dashboard",
+        href: "/",
         icon: LayoutDashboard,
       },
     ],

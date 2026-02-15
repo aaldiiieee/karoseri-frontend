@@ -2,21 +2,24 @@ import { Outlet } from "react-router";
 import { Sidebar } from "@/shared/components/partial/sidebar";
 import { useSidebar, useMobileSidebar } from "@/shared/hooks";
 import { Navbar, NavbarMobileOverlay } from "../components/partial/navbar";
-
-// TODO: Change with auth context/store
-const mockUser = {
-  name: "John Doe",
-  email: "john@example.com",
-};
+import { useUser } from "@/features/auth/hooks/useUser";
 
 export const MainLayout = () => {
   const { collapsed, toggle } = useSidebar();
   const mobileSidebar = useMobileSidebar();
+  const { data: user } = useUser();
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
     window.location.href = "/auth/login";
   };
+
+  const userData = user
+    ? {
+      name: user.username,
+      email: `${user.username}@karoseri.com`, // Pseudo email for now
+    }
+    : { name: "Guest", email: "guest@example.com" };
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -25,7 +28,7 @@ export const MainLayout = () => {
         <Sidebar
           collapsed={collapsed}
           onToggle={toggle}
-          user={mockUser}
+          user={userData}
           onLogout={handleLogout}
         />
       </div>
@@ -38,7 +41,7 @@ export const MainLayout = () => {
         <Sidebar
           collapsed={false}
           onToggle={mobileSidebar.close}
-          user={mockUser}
+          user={userData}
           onLogout={handleLogout}
         />
       </NavbarMobileOverlay>

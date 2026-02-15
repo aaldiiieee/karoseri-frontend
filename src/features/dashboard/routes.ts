@@ -4,7 +4,7 @@ import { DashboardView } from "./views/DashboardView";
 
 export const DashboardRoutes: RouteObject[] = [
   {
-    path: "/dashboard",
+    path: "/",
     Component: MainLayout,
     children: [
       {

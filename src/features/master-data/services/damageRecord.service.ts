@@ -8,6 +8,7 @@ import type {
 } from "../types/damageRecord.type";
 
 // Response transformer
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const transformDamageRecord = (data: any): DamageRecord => ({
   id: data.id,
   componentId: data.component_id,
@@ -32,6 +33,7 @@ const transformDamageRecord = (data: any): DamageRecord => ({
   updatedAt: data.updated_at,
 });
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const transformDamageRecordList = (data: any): DamageRecordList => ({
   items: data.items.map(transformDamageRecord),
   total: data.total,

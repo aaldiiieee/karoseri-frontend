@@ -22,21 +22,13 @@ export function DataTable<T>({
   navigateToAdd,
   title,
 }: DataTableProps<T>) {
+  const navigate = useNavigate();
+
   if (isLoading) {
     return <DataTableSkeleton columns={columns.length} />;
   }
 
-  if (data.length === 0) {
-    return (
-      <div className="flex h-48 items-center justify-center rounded-lg border bg-card">
-        <p className="text-muted-foreground">{emptyMessage}</p>
-      </div>
-    );
-  }
-
   const hasActions = actions.length > 0;
-
-  const navigate = useNavigate();
 
   return (
     <div className="space-y-4">
@@ -44,7 +36,7 @@ export function DataTable<T>({
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
+              <BreadcrumbLink href="/">Dashboard</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
@@ -70,7 +62,7 @@ export function DataTable<T>({
                     key={column.key}
                     className={cn(
                       "px-4 py-3 text-left text-sm font-medium text-muted-foreground text-nowrap",
-                      column.headerClassName
+                      column.headerClassName,
                     )}
                   >
                     {column.header}
@@ -84,45 +76,56 @@ export function DataTable<T>({
               </tr>
             </thead>
             <tbody className="divide-y">
-              {data.map((item) => {
-                const id = keyExtractor(item);
-                return (
-                  <tr key={id} className="hover:bg-muted/50">
-                    {columns.map((column) => (
-                      <td
-                        key={column.key}
-                        className={cn(
-                          "px-4 py-3 text-nowrap",
-                          column.cellClassName
-                        )}
-                      >
-                        {column.render(item)}
-                      </td>
-                    ))}
-                    {hasActions && (
-                      <td className="px-4 py-3">
-                        <div className="flex items-center justify-end gap-1">
-                          {actions.map((action, index) => (
-                            <button
-                              key={index}
-                              onClick={() => action.onClick(item)}
-                              className={cn(
-                                "rounded-lg p-2 transition-colors",
-                                action.variant === "destructive"
-                                  ? "text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
-                                  : "text-muted-foreground hover:bg-accent hover:text-foreground"
-                              )}
-                              title={action.label}
-                            >
-                              {action.icon}
-                            </button>
-                          ))}
-                        </div>
-                      </td>
-                    )}
-                  </tr>
-                );
-              })}
+              {data.length === 0 ? (
+                <tr>
+                  <td
+                    colSpan={columns.length + (hasActions ? 1 : 0)}
+                    className="px-4 py-6 text-center text-sm text-muted-foreground"
+                  >
+                    {emptyMessage}
+                  </td>
+                </tr>
+              ) : (
+                data.map((item) => {
+                  const id = keyExtractor(item);
+                  return (
+                    <tr key={id} className="hover:bg-muted/50">
+                      {columns.map((column) => (
+                        <td
+                          key={column.key}
+                          className={cn(
+                            "px-4 py-3 text-nowrap",
+                            column.cellClassName,
+                          )}
+                        >
+                          {column.render(item)}
+                        </td>
+                      ))}
+                      {hasActions && (
+                        <td className="px-4 py-3">
+                          <div className="flex items-center justify-end gap-1">
+                            {actions.map((action, index) => (
+                              <button
+                                key={index}
+                                onClick={() => action.onClick(item)}
+                                className={cn(
+                                  "rounded-lg p-2 transition-colors",
+                                  action.variant === "destructive"
+                                    ? "text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
+                                    : "text-muted-foreground hover:bg-accent hover:text-foreground",
+                                )}
+                                title={action.label}
+                              >
+                                {action.icon}
+                              </button>
+                            ))}
+                          </div>
+                        </td>
+                      )}
+                    </tr>
+                  );
+                })
+              )}
             </tbody>
           </table>
         </div>

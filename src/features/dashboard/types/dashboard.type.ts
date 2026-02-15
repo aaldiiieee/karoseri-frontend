@@ -1,10 +1,10 @@
-// Dashboard Statistics
+// Dashboard Statistics — matches API response (snake_case)
 export interface DashboardStats {
   total_components: number;
   total_damage_records: number;
   total_predictions: number;
   damage_distribution: DamageDistribution;
-  recent_predictions: PredictionHistory[];
+  recent_predictions: RecentPrediction[];
   model_accuracy: number | null;
   is_model_trained: boolean;
 }
@@ -16,32 +16,29 @@ export interface DamageDistribution {
   total: number;
 }
 
-export interface PredictionHistory {
+// Recent prediction — matches API response (snake_case)
+export interface RecentPrediction {
   id: string;
-  componentId: string;
+  component_id: string;
   component: ComponentInfo | null;
-  predictedLevel: DamageLevel;
+  predicted_level: string;
   confidence: number;
   probabilities: PredictionProbabilities;
-  damageArea: number;
-  damageDepth: number;
-  damagePointCount: number;
-  componentAge: number;
-  usageFrequency: number;
-  corrosionLevel: number;
-  deformation: number;
+  features_used: DamageFeatures;
   notes: string | null;
-  createdAt: string;
-  updatedAt: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface ComponentInfo {
   id: string;
-  componentCode: string;
-  componentName: string;
+  code: string;
+  name: string;
   category: string;
   description: string | null;
-  isActive: boolean;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface PredictionProbabilities {
@@ -50,7 +47,15 @@ export interface PredictionProbabilities {
   berat: number;
 }
 
-export type DamageLevel = "Ringan" | "Sedang" | "Berat";
+export interface DamageFeatures {
+  damage_area: number;
+  damage_depth: number;
+  damage_point_count: number;
+  component_age: number;
+  usage_frequency: number;
+  corrosion_level: number;
+  deformation: number;
+}
 
 // Chart Data
 export interface ChartData {

@@ -1,12 +1,14 @@
 import { useRoutes } from "react-router";
-import { LandingRoutes } from "@/features/landing/routes";
+import { AuthRoutes } from "@/features/auth/routes";
 import { DashboardRoutes } from "@/features/dashboard/routes";
 import { MasterDataRoutes } from "@/features/master-data/route";
+import { AnalysisRoutes } from "@/features/analysis/routes";
 
 export const appRoutes = [
-  ...LandingRoutes,
+  ...AuthRoutes,
   ...DashboardRoutes,
   ...MasterDataRoutes,
+  ...AnalysisRoutes,
 ];
 
 export const AppRouter = () => {
