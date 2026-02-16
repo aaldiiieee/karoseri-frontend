@@ -69,12 +69,11 @@ export const DashboardView = () => {
         />
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-7">
+      <div className="grid gap-4 lg:grid-cols-7 mb-3">
         <div className="lg:col-span-4 space-y-6">
           {stats?.damage_distribution && (
             <DamageDistributionChart data={stats.damage_distribution} />
           )}
-          <RecentPredictions predictions={stats?.recent_predictions || []} />
         </div>
         <div className="lg:col-span-3 space-y-6">
           <ModelStatusBadge
@@ -109,6 +108,7 @@ export const DashboardView = () => {
           </div>
         </div>
       </div>
+      <RecentPredictions predictions={stats?.recent_predictions || []} />
     </div>
   );
 };

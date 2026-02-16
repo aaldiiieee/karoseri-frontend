@@ -38,7 +38,7 @@ export const DamageDistributionChart = ({
   const maxValue = Math.max(data.ringan, data.sedang, data.berat, 1);
 
   return (
-    <div className="rounded-xl border bg-card p-6 shadow-sm">
+    <div className="rounded-xl border bg-card p-6 shadow-sm h-full">
       <div className="mb-6 flex items-center justify-between">
         <div>
           <h3 className="text-lg font-semibold text-foreground">

@@ -11,7 +11,7 @@ export const ModelStatusBadge = ({
   accuracy,
 }: ModelStatusBadgeProps) => {
   return (
-    <div className="rounded-xl border bg-card p-6 shadow-sm">
+    <div className="rounded-xl border bg-card p-6 shadow-sm mb-2">
       <div className="flex items-center gap-3">
         <div
           className={cn(
