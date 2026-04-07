@@ -1,9 +1,8 @@
-import { Box, Database, Activity, TrendingUp } from "lucide-react";
+import { Box, Database, Activity } from "lucide-react";
 import {
   StatsCard,
   DamageDistributionChart,
   RecentPredictions,
-  ModelStatusBadge,
 } from "../components";
 import { useDashboardStats } from "../hooks/useDashboard";
 import { useUser } from "@/features/auth/hooks/useUser";
@@ -11,6 +10,7 @@ import { useUser } from "@/features/auth/hooks/useUser";
 export const DashboardView = () => {
   const { data: stats, isLoading, error } = useDashboardStats();
   const { data: user } = useUser();
+  console.log(user);
 
   if (isLoading) {
     return <DashboardSkeleton />;
@@ -26,7 +26,8 @@ export const DashboardView = () => {
           Gagal memuat data
         </h3>
         <p className="mt-2 text-sm text-muted-foreground max-w-sm">
-          {error.message || "Terjadi kesalahan saat menghubungi server. Silakan coba lagi nanti."}
+          {error.message ||
+            "Terjadi kesalahan saat menghubungi server. Silakan coba lagi nanti."}
         </p>
       </div>
     );
@@ -34,7 +35,7 @@ export const DashboardView = () => {
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <StatsCard
           title="Total Komponen"
           value={stats?.total_components || 0}
@@ -56,7 +57,7 @@ export const DashboardView = () => {
           icon={Activity}
           variant="warning"
         />
-        <StatsCard
+        {/* <StatsCard
           title="Akurasi Model"
           value={
             stats?.model_accuracy
@@ -66,7 +67,7 @@ export const DashboardView = () => {
           subtitle={stats?.is_model_trained ? "Model Terlatih" : "Butuh Pelatihan"}
           icon={TrendingUp}
           variant={stats?.is_model_trained ? "danger" : "default"}
-        />
+        /> */}
       </div>
 
       <div className="grid gap-4 lg:grid-cols-7 mb-3">
@@ -76,34 +77,36 @@ export const DashboardView = () => {
           )}
         </div>
         <div className="lg:col-span-3 space-y-6">
-          <ModelStatusBadge
+          {/* <ModelStatusBadge
             isTrained={stats?.is_model_trained || false}
             accuracy={stats?.model_accuracy ?? null}
-          />
-          <div className="rounded-2xl border bg-card p-6 shadow-sm">
+          /> */}
+          <div className="rounded-2xl border bg-card p-6 shadow-sm h-full">
             <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
               <Activity className="h-4 w-4 text-primary" />
               Ringkasan Distribusi
             </h3>
-            <div className="mt-6 grid grid-cols-3 gap-4">
-              <QuickStat
-                label="Ringan"
-                value={stats?.damage_distribution.ringan || 0}
-                color="text-emerald-600 dark:text-emerald-400"
-                bg="bg-emerald-50 dark:bg-emerald-900/10"
-              />
-              <QuickStat
-                label="Sedang"
-                value={stats?.damage_distribution.sedang || 0}
-                color="text-amber-600 dark:text-amber-400"
-                bg="bg-amber-50 dark:bg-amber-900/10"
-              />
-              <QuickStat
-                label="Berat"
-                value={stats?.damage_distribution.berat || 0}
-                color="text-rose-600 dark:text-rose-400"
-                bg="bg-rose-50 dark:bg-rose-900/10"
-              />
+            <div className="flex items-center justify-center h-full">
+              <div className="grid grid-cols-3 gap-4">
+                <QuickStat
+                  label="Ringan"
+                  value={stats?.damage_distribution.ringan || 0}
+                  color="text-emerald-600 dark:text-emerald-400"
+                  bg="bg-emerald-50 dark:bg-emerald-900/10"
+                />
+                <QuickStat
+                  label="Sedang"
+                  value={stats?.damage_distribution.sedang || 0}
+                  color="text-amber-600 dark:text-amber-400"
+                  bg="bg-amber-50 dark:bg-amber-900/10"
+                />
+                <QuickStat
+                  label="Berat"
+                  value={stats?.damage_distribution.berat || 0}
+                  color="text-rose-600 dark:text-rose-400"
+                  bg="bg-rose-50 dark:bg-rose-900/10"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -126,9 +129,13 @@ function QuickStat({
   bg: string;
 }) {
   return (
-    <div className={`flex flex-col items-center justify-center rounded-xl p-4 transition-transform hover:scale-105 ${bg}`}>
+    <div
+      className={`flex flex-col items-center justify-center rounded-xl p-4 transition-transform hover:scale-105 ${bg}`}
+    >
       <p className={`text-3xl font-bold ${color}`}>{value}</p>
-      <p className="mt-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">{label}</p>
+      <p className="mt-1 text-xs font-medium text-muted-foreground uppercase tracking-wider">
+        {label}
+      </p>
     </div>
   );
 }

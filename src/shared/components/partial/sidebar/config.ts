@@ -5,7 +5,7 @@ import {
   Settings,
   HelpCircle,
   Users,
-  FileBarChart,
+  // FileBarChart,
   Component,
   ShieldAlert,
 } from "lucide-react";
@@ -50,11 +50,11 @@ export const sidebarNav: NavGroup[] = [
         href: "/analysis/history",
         icon: History,
       },
-      {
-        title: "Laporan",
-        href: "/reports",
-        icon: FileBarChart,
-      },
+      // {
+      //   title: "Laporan",
+      //   href: "/reports",
+      //   icon: FileBarChart,
+      // },
     ],
   },
   {
