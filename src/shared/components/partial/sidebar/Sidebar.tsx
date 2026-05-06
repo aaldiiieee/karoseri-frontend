@@ -1,9 +1,9 @@
 import { Link } from "react-router";
-import { PanelLeftClose, PanelLeft } from "lucide-react";
+import { PanelLeftClose, PanelLeft, LogOut } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
 import { sidebarNav } from "./config";
 import { SidebarNavGroup } from "./SidebarNavGroup";
-import { SidebarUser } from "./SidebarUser";
+// import { SidebarUser } from "./SidebarUser";
 import CompanyLogo from "/images/logo-karoseri.png";
 
 interface SidebarProps {
@@ -20,21 +20,21 @@ interface SidebarProps {
 export const Sidebar = ({
   collapsed,
   onToggle,
-  user,
+  // user,
   onLogout,
 }: SidebarProps) => {
   return (
     <aside
       className={cn(
         "flex h-screen flex-col border-r bg-card transition-all duration-300 md:static absolute z-10",
-        collapsed ? "w-16" : "w-64"
+        collapsed ? "w-16" : "w-64",
       )}
     >
       {/* Header */}
       <div
         className={cn(
           "flex h-16 items-center border-b px-4",
-          collapsed ? "justify-center" : "justify-between"
+          collapsed ? "justify-center" : "justify-between",
         )}
       >
         {!collapsed && (
@@ -70,11 +70,21 @@ export const Sidebar = ({
       </div>
 
       {/* User */}
-      {user && (
+      {/* {user && (
         <div className={cn("border-t", collapsed ? "p-0" : "p-3")}>
           <SidebarUser user={user} collapsed={collapsed} onLogout={onLogout} />
         </div>
-      )}
+      )} */}
+
+      <div className={cn("border-t", collapsed ? "p-0" : "p-3")}>
+        <button
+          onClick={onLogout}
+          className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm text-red-600 hover:bg-accent"
+        >
+          <LogOut className="h-4 w-4" />
+          Logout
+        </button>
+      </div>
     </aside>
   );
 };

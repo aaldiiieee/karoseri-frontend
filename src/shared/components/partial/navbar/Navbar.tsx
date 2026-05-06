@@ -1,5 +1,5 @@
-import { Menu, Sun, Moon } from "lucide-react";
-import { useTheme } from "@/shared/hooks/useTheme";
+import { Menu } from "lucide-react";
+// import { useTheme } from "@/shared/hooks/useTheme";
 import { Link } from "react-router";
 import CompanyLogo from "/images/logo-karoseri.png";
 
@@ -8,7 +8,7 @@ interface NavbarProps {
 }
 
 export const Navbar = ({ onMenuClick }: NavbarProps) => {
-  const { isDark, toggleTheme } = useTheme();
+  // const { isDark, toggleTheme } = useTheme();
 
   return (
     <header className="flex h-16 shrink-0 items-center justify-between border-b bg-card px-4 lg:px-6">
@@ -30,14 +30,14 @@ export const Navbar = ({ onMenuClick }: NavbarProps) => {
         <img src={CompanyLogo} alt="Logo" className="w-16" />
       </Link>
 
-      <div className="flex items-center gap-2">
+      {/* <div className="flex items-center gap-2">
         <button
           onClick={toggleTheme}
           className="flex h-10 w-10 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
         >
           {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
         </button>
-      </div>
+      </div> */}
     </header>
   );
 };

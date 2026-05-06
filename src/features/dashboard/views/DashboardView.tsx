@@ -2,7 +2,7 @@ import { Box, Database, Activity } from "lucide-react";
 import {
   StatsCard,
   DamageDistributionChart,
-  RecentPredictions,
+  // RecentPredictions,
 } from "../components";
 import { useDashboardStats } from "../hooks/useDashboard";
 import { useUser } from "@/features/auth/hooks/useUser";
@@ -111,7 +111,7 @@ export const DashboardView = () => {
           </div>
         </div>
       </div>
-      <RecentPredictions predictions={stats?.recent_predictions || []} />
+      {/* <RecentPredictions predictions={stats?.recent_predictions || []} /> */}
     </div>
   );
 };

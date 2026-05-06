@@ -28,7 +28,7 @@ export const MainLayout = () => {
         <Sidebar
           collapsed={collapsed}
           onToggle={toggle}
-          user={userData}
+          // user={userData}
           onLogout={handleLogout}
         />
       </div>

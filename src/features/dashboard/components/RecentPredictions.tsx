@@ -1,6 +1,6 @@
 import { cn } from "@/shared/lib/utils";
-import { Activity, ArrowRight } from "lucide-react";
-import { useNavigate } from "react-router";
+import { Activity } from "lucide-react";
+// import { useNavigate } from "react-router";
 import type { DashboardStats } from "../types/dashboard.type";
 
 interface RecentPredictionsProps {
@@ -16,7 +16,7 @@ const LEVEL_BADGE: Record<string, string> = {
 };
 
 export const RecentPredictions = ({ predictions }: RecentPredictionsProps) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   return (
     <div className="rounded-xl border bg-card shadow-sm">
@@ -27,13 +27,13 @@ export const RecentPredictions = ({ predictions }: RecentPredictionsProps) => {
             Prediksi Terbaru
           </h3>
         </div>
-        <button
+        {/* <button
           onClick={() => navigate("/analysis/history")}
           className="flex items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80"
         >
           Lihat Semua
           <ArrowRight className="h-4 w-4" />
-        </button>
+        </button> */}
       </div>
 
       <div className="divide-y">

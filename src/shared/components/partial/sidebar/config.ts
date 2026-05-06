@@ -1,10 +1,10 @@
 import {
-  LayoutDashboard,
+  // LayoutDashboard,
   Upload,
   History,
-  Settings,
-  HelpCircle,
-  Users,
+  // Settings,
+  // HelpCircle,
+  // Users,
   // FileBarChart,
   Component,
   ShieldAlert,
@@ -12,16 +12,16 @@ import {
 import type { NavGroup } from "./types";
 
 export const sidebarNav: NavGroup[] = [
-  {
-    title: "Overview",
-    items: [
-      {
-        title: "Dashboard",
-        href: "/",
-        icon: LayoutDashboard,
-      },
-    ],
-  },
+  // {
+  //   title: "Overview",
+  //   items: [
+  //     {
+  //       title: "Dashboard",
+  //       href: "/",
+  //       icon: LayoutDashboard,
+  //     },
+  //   ],
+  // },
   {
     title: "Master Data",
     items: [
@@ -57,24 +57,24 @@ export const sidebarNav: NavGroup[] = [
       // },
     ],
   },
-  {
-    title: "Pengaturan",
-    items: [
-      {
-        title: "Tim",
-        href: "/settings/team",
-        icon: Users,
-      },
-      {
-        title: "Pengaturan",
-        href: "/settings",
-        icon: Settings,
-      },
-      {
-        title: "Bantuan",
-        href: "/help",
-        icon: HelpCircle,
-      },
-    ],
-  },
+  // {
+  //   title: "Pengaturan",
+  //   items: [
+  //     {
+  //       title: "Tim",
+  //       href: "/settings/team",
+  //       icon: Users,
+  //     },
+  //     {
+  //       title: "Pengaturan",
+  //       href: "/settings",
+  //       icon: Settings,
+  //     },
+  //     {
+  //       title: "Bantuan",
+  //       href: "/help",
+  //       icon: HelpCircle,
+  //     },
+  //   ],
+  // },
 ];
