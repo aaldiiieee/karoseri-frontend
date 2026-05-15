@@ -18,7 +18,7 @@ const DAMAGE_BADGE: Record<DamageLevel, string> = {
 export const columns = getColumns<DamageRecord>([
   {
     key: "component",
-    header: "Component",
+    header: "Komponen",
     render: (item) => (
       <div>
         <p className="font-medium">{item.component?.name}</p>
@@ -36,7 +36,7 @@ export const columns = getColumns<DamageRecord>([
   },
   {
     key: "damageDepth",
-    header: "Depth (mm)",
+    header: "Kedalaman (mm)",
     render: (item) => (
       <span className="font-mono text-sm">{item.damageDepth}</span>
     ),
@@ -44,7 +44,7 @@ export const columns = getColumns<DamageRecord>([
   },
   {
     key: "damagePointCount",
-    header: "Points",
+    header: "Poin",
     render: (item) => (
       <span className="font-mono text-sm">{item.damagePointCount}</span>
     ),
@@ -52,7 +52,7 @@ export const columns = getColumns<DamageRecord>([
   },
   {
     key: "componentAge",
-    header: "Age (mo)",
+    header: "Usia (bln)",
     render: (item) => (
       <span className="font-mono text-sm">{item.componentAge}</span>
     ),

@@ -8,6 +8,7 @@ import {
   // FileBarChart,
   Component,
   ShieldAlert,
+  Users,
 } from "lucide-react";
 import type { NavGroup } from "./types";
 
@@ -34,6 +35,11 @@ export const sidebarNav: NavGroup[] = [
         title: "Data Kerusakan",
         href: "/master-data/damage-record",
         icon: ShieldAlert,
+      },
+      {
+        title: "Tim",
+        href: "/settings/team",
+        icon: Users,
       },
     ],
   },

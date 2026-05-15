@@ -4,17 +4,22 @@ import { getColumns, getActions } from "@/shared/utils/dataTable.util";
 import type { User, UserActionHandlers } from "../types/user.type";
 
 const ROLE_BADGE: Record<string, string> = {
-  admin:
+  superadmin:
     "bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400",
-  user: "bg-sky-100 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400",
+  technician: "bg-sky-100 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400",
 };
 
-const STATUS_BADGE: Record<string, string> = {
-  active:
-    "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
-  inactive:
-    "bg-gray-100 text-gray-500 dark:bg-gray-800/50 dark:text-gray-400",
+const ROLE_LABEL: Record<string, string> = {
+  superadmin: "Superadmin",
+  technician: "Teknisi",
 };
+
+// const STATUS_BADGE: Record<string, string> = {
+//   active:
+//     "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
+//   inactive:
+//     "bg-gray-100 text-gray-500 dark:bg-gray-800/50 dark:text-gray-400",
+// };
 
 export const columns = getColumns<User>([
   {
@@ -34,25 +39,25 @@ export const columns = getColumns<User>([
           ROLE_BADGE[item.role] || "bg-muted text-muted-foreground"
         )}
       >
-        {item.role}
+        {ROLE_LABEL[item.role] || item.role}
       </span>
     ),
   },
-  {
-    key: "status",
-    header: "Status",
-    render: (item) => (
-      <span
-        className={cn(
-          "rounded-full px-2.5 py-1 text-xs font-medium",
-          item.isActive ? STATUS_BADGE.active : STATUS_BADGE.inactive
-        )}
-      >
-        {item.isActive ? "Active" : "Inactive"}
-      </span>
-    ),
-    hideOnMobile: true,
-  },
+  // {
+  //   key: "status",
+  //   header: "Status",
+  //   render: (item) => (
+  //     <span
+  //       className={cn(
+  //         "rounded-full px-2.5 py-1 text-xs font-medium",
+  //         item.isActive ? STATUS_BADGE.active : STATUS_BADGE.inactive
+  //       )}
+  //     >
+  //       {item.isActive ? "Active" : "Inactive"}
+  //     </span>
+  //   ),
+  //   hideOnMobile: true,
+  // },
   {
     key: "createdAt",
     header: "Bergabung",

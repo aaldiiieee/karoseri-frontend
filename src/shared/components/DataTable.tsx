@@ -78,7 +78,7 @@ export function DataTable<T>({
                 ))}
                 {hasActions && (
                   <th className="px-4 py-3 text-right text-sm font-medium text-muted-foreground">
-                    Actions
+                    Aksi
                   </th>
                 )}
               </tr>

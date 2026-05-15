@@ -7,7 +7,7 @@ export interface User {
   updatedAt: string;
 }
 
-export type UserRole = "admin" | "user";
+export type UserRole = "superadmin" | "technician";
 
 export interface UserCreate {
   username: string;

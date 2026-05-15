@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router";
-import { Upload } from "lucide-react";
+// import { Upload } from "lucide-react";
 import { DataTable } from "@/shared/components/DataTable";
-import { useDamageRecords, useDeleteDamageRecord, useBulkImportDamageRecord } from "../hooks/useDamageRecord";
+import { useDamageRecords, useDeleteDamageRecord } from "../hooks/useDamageRecord";
 import { columns, actions } from "../components/DamageRecordColumns";
-import { DatasetImportDialog } from "../components/DatasetImportDialog";
-import { Button } from "@/shared/components/ui/button";
-import { damageRecordService } from "../services/damageRecord.service";
+// import { DatasetImportDialog } from "../components/DatasetImportDialog";
+// import { Button } from "@/shared/components/ui/button";
+// import { damageRecordService } from "../services/damageRecord.service";
 import { usePaginationParams } from "@/shared/hooks";
-import { useState } from "react";
+// import { useState } from "react";
 
 export const DamageRecordListView = () => {
   const navigate = useNavigate();
@@ -15,9 +15,10 @@ export const DamageRecordListView = () => {
 
   const { data, isLoading } = useDamageRecords({ page, size });
   const deleteMutation = useDeleteDamageRecord();
-  const importMutation = useBulkImportDamageRecord();
-  const [importOpen, setImportOpen] = useState(false);
+  // const importMutation = useBulkImportDamageRecord();
+  // const [importOpen, setImportOpen] = useState(false);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleDelete = async (item: any) => {
     if (confirm("Apakah Anda yakin ingin menghapus data ini?")) {
       await deleteMutation.mutateAsync(item.id);
@@ -37,16 +38,16 @@ export const DamageRecordListView = () => {
         isLoading={isLoading}
         navigateToAdd="/master-data/damage-record/add"
         title="Data Kerusakan"
-        extraActions={
-          <Button
-            variant="outline"
-            className="gap-2"
-            onClick={() => setImportOpen(true)}
-          >
-            <Upload className="h-4 w-4" />
-            Import Dataset
-          </Button>
-        }
+        // extraActions={
+        //   <Button
+        //     variant="outline"
+        //     className="gap-2"
+        //     onClick={() => setImportOpen(true)}
+        //   >
+        //     <Upload className="h-4 w-4" />
+        //     Import Dataset
+        //   </Button>
+        // }
         pagination={{
           page: data?.page ?? 1,
           size: data?.size ?? 10,
@@ -57,13 +58,13 @@ export const DamageRecordListView = () => {
         }}
       />
 
-      <DatasetImportDialog
+      {/* <DatasetImportDialog
         open={importOpen}
         onClose={() => setImportOpen(false)}
         title="Import Data Kerusakan"
         onImport={(file) => importMutation.mutateAsync(file)}
         onDownloadTemplate={() => damageRecordService.downloadTemplate()}
-      />
+      /> */}
     </>
   );
 };

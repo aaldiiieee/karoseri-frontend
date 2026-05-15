@@ -1,0 +1,135 @@
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowLeft, Loader2 } from "lucide-react";
+import { AxiosError } from "axios";
+
+import { Button } from "@/shared/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/shared/components/ui/card";
+import { ApiError } from "@/shared/lib/api/error";
+
+import { UserForm } from "../components/UserForm";
+import {
+  userEditSchema,
+  userEditDefaultValues,
+  type UserFormValues,
+} from "../schema/user.schema";
+import { useUser, useUpdateUser } from "../hooks/useUser";
+
+export function UserEditView() {
+  const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
+
+  const { data: user, isLoading: isLoadingUser } = useUser(id!);
+  const updateMutation = useUpdateUser();
+
+  const form = useForm<UserFormValues>({
+    resolver: zodResolver(userEditSchema),
+    defaultValues: userEditDefaultValues,
+  });
+
+  useEffect(() => {
+    if (user) {
+      form.reset({
+        username: user.username,
+        password: "",
+        role: user.role,
+        isActive: user.isActive,
+      });
+    }
+  }, [user, form]);
+
+  const handleSubmit = async (values: UserFormValues) => {
+    if (!id) return;
+
+    try {
+      await updateMutation.mutateAsync({
+        id,
+        data: {
+          username: values.username,
+          role: values.role,
+          isActive: values.isActive,
+          ...(values.password ? { password: values.password } : {}),
+        },
+      });
+      navigate("/settings/team");
+    } catch (error) {
+      handleError(error);
+    }
+  };
+
+  const handleError = (error: unknown) => {
+    if (error instanceof ApiError) return;
+
+    if (error instanceof AxiosError) {
+      const apiError = ApiError.fromAxiosError(error);
+
+      if (apiError.isValidationError && apiError.errors) {
+        Object.entries(apiError.errors).forEach(([field, messages]) => {
+          form.setError(field as keyof UserFormValues, {
+            type: "server",
+            message: messages[0],
+          });
+        });
+      } else {
+        console.error("Submission error:", apiError);
+      }
+    }
+  };
+
+  const handleCancel = () => {
+    navigate("/settings/team");
+  };
+
+  if (isLoadingUser) {
+    return (
+      <div className="flex h-[400px] items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center gap-4">
+        <Button variant="ghost" size="icon" onClick={handleCancel}>
+          <ArrowLeft className="h-5 w-5" />
+        </Button>
+        <div>
+          <h1 className="text-2xl font-semibold tracking-tight">
+            Edit Pengguna
+          </h1>
+          <p className="text-sm text-muted-foreground">
+            Perbarui informasi akun pengguna
+          </p>
+        </div>
+      </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Edit Pengguna</CardTitle>
+          <CardDescription>
+            Ubah informasi pengguna. Kosongkan field password jika tidak ingin
+            mengubahnya.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <UserForm
+            form={form}
+            onSubmit={handleSubmit}
+            onCancel={handleCancel}
+            isLoading={updateMutation.isPending}
+            isEditMode
+          />
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
