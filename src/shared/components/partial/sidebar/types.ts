@@ -1,10 +1,11 @@
-import type { LucideIcon } from "lucide-react";
+import type { UserRole } from "./config";
 
 export interface NavItem {
   title: string;
   href: string;
-  icon: LucideIcon;
+  icon: React.ComponentType<{ className?: string }>;
   badge?: string | number;
+  roles?: UserRole[];
 }
 
 export interface NavGroup {

@@ -1,28 +1,9 @@
-import {
-  // LayoutDashboard,
-  Upload,
-  History,
-  // Settings,
-  // HelpCircle,
-  // Users,
-  // FileBarChart,
-  Component,
-  ShieldAlert,
-  Users,
-} from "lucide-react";
+import { Upload, History, Component, ShieldAlert, Users } from "lucide-react";
 import type { NavGroup } from "./types";
 
+export type UserRole = "superadmin" | "technician";
+
 export const sidebarNav: NavGroup[] = [
-  // {
-  //   title: "Overview",
-  //   items: [
-  //     {
-  //       title: "Dashboard",
-  //       href: "/",
-  //       icon: LayoutDashboard,
-  //     },
-  //   ],
-  // },
   {
     title: "Master Data",
     items: [
@@ -30,16 +11,19 @@ export const sidebarNav: NavGroup[] = [
         title: "Komponen",
         href: "/master-data/component",
         icon: Component,
+        roles: ["superadmin"],
       },
       {
         title: "Data Kerusakan",
         href: "/master-data/damage-record",
         icon: ShieldAlert,
+        roles: ["superadmin"],
       },
       {
         title: "Tim",
         href: "/settings/team",
         icon: Users,
+        roles: ["superadmin"],
       },
     ],
   },
@@ -50,37 +34,14 @@ export const sidebarNav: NavGroup[] = [
         title: "Klasifikasi Baru",
         href: "/analysis",
         icon: Upload,
+        roles: ["superadmin", "technician"],
       },
       {
         title: "Riwayat",
         href: "/analysis/history",
         icon: History,
+        roles: ["superadmin", "technician"],
       },
-      // {
-      //   title: "Laporan",
-      //   href: "/reports",
-      //   icon: FileBarChart,
-      // },
     ],
   },
-  // {
-  //   title: "Pengaturan",
-  //   items: [
-  //     {
-  //       title: "Tim",
-  //       href: "/settings/team",
-  //       icon: Users,
-  //     },
-  //     {
-  //       title: "Pengaturan",
-  //       href: "/settings",
-  //       icon: Settings,
-  //     },
-  //     {
-  //       title: "Bantuan",
-  //       href: "/help",
-  //       icon: HelpCircle,
-  //     },
-  //   ],
-  // },
 ];

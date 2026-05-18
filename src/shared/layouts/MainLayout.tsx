@@ -3,6 +3,7 @@ import { Sidebar } from "@/shared/components/partial/sidebar";
 import { useSidebar, useMobileSidebar } from "@/shared/hooks";
 import { Navbar, NavbarMobileOverlay } from "../components/partial/navbar";
 import { useUser } from "@/features/auth/hooks/useUser";
+import type { UserRole } from "../components/partial/sidebar/config";
 
 export const MainLayout = () => {
   const { collapsed, toggle } = useSidebar();
@@ -28,7 +29,7 @@ export const MainLayout = () => {
         <Sidebar
           collapsed={collapsed}
           onToggle={toggle}
-          // user={userData}
+          userRole={userData?.role as UserRole}
           onLogout={handleLogout}
         />
       </div>
@@ -41,7 +42,7 @@ export const MainLayout = () => {
         <Sidebar
           collapsed={false}
           onToggle={mobileSidebar.close}
-          user={userData}
+          userRole={userData?.role as UserRole}
           onLogout={handleLogout}
         />
       </NavbarMobileOverlay>

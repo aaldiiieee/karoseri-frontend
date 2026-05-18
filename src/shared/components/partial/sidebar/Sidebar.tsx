@@ -1,28 +1,32 @@
 import { Link } from "react-router";
 import { PanelLeftClose, PanelLeft, LogOut } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
-import { sidebarNav } from "./config";
+import { sidebarNav, type UserRole } from "./config";
 import { SidebarNavGroup } from "./SidebarNavGroup";
-// import { SidebarUser } from "./SidebarUser";
 import CompanyLogo from "/images/logo-karoseri.png";
 
 interface SidebarProps {
   collapsed?: boolean;
   onToggle?: () => void;
-  user?: {
-    name: string;
-    role: string;
-    avatar?: string;
-  };
+  userRole?: UserRole;
   onLogout?: () => void;
 }
 
 export const Sidebar = ({
   collapsed,
   onToggle,
-  // user,
+  userRole,
   onLogout,
 }: SidebarProps) => {
+  const filteredNav = sidebarNav
+    .map((group) => ({
+      ...group,
+      items: group.items.filter(
+        (item) => !item.roles || !userRole || item.roles.includes(userRole),
+      ),
+    }))
+    .filter((group) => group.items.length > 0);
+
   return (
     <aside
       className={cn(
@@ -42,7 +46,6 @@ export const Sidebar = ({
             <img src={CompanyLogo} alt="Logo" className="w-16" />
           </Link>
         )}
-
         <button
           onClick={onToggle}
           className="rounded-lg p-2 hover:bg-accent"
@@ -59,7 +62,7 @@ export const Sidebar = ({
       {/* Navigation */}
       <div className="flex-1 overflow-y-auto p-3">
         <div className="space-y-6">
-          {sidebarNav.map((group) => (
+          {filteredNav.map((group) => (
             <SidebarNavGroup
               key={group.title}
               group={group}
@@ -69,20 +72,14 @@ export const Sidebar = ({
         </div>
       </div>
 
-      {/* User */}
-      {/* {user && (
-        <div className={cn("border-t", collapsed ? "p-0" : "p-3")}>
-          <SidebarUser user={user} collapsed={collapsed} onLogout={onLogout} />
-        </div>
-      )} */}
-
+      {/* Logout */}
       <div className={cn("border-t", collapsed ? "p-0" : "p-3")}>
         <button
           onClick={onLogout}
           className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm text-red-600 hover:bg-accent"
         >
           <LogOut className="h-4 w-4" />
-          Logout
+          {!collapsed && "Logout"}
         </button>
       </div>
     </aside>
