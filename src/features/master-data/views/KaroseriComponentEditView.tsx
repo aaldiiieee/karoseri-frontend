@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,51 +14,48 @@ import {
 } from "@/shared/components/ui/card";
 import { ApiError } from "@/shared/lib/api/error";
 
-import { UserForm } from "../components/UserForm";
+import { KaroseriComponentForm } from "../components/KaroseriComponentForm";
 import {
-  userEditSchema,
-  userEditDefaultValues,
-  type UserFormValues,
-} from "../schema/user.schema";
-import { useUser, useUpdateUser } from "../hooks/useUser";
+  componentFormSchema,
+  componentFormDefaultValues,
+  type ComponentFormValues,
+} from "../schema/componentForm.schema";
+import { useComponent, useUpdateComponent } from "../hooks/useKaroseriComponent";
 
-export function UserEditView() {
+export function KaroseriComponentEditView() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
 
-  const { data: user, isLoading: isLoadingUser } = useUser(id!);
-  const updateMutation = useUpdateUser();
+  const { data: component, isLoading: isLoadingComponent } = useComponent(id!);
+  const updateMutation = useUpdateComponent();
 
-  const form = useForm<UserFormValues>({
-    resolver: zodResolver(userEditSchema),
-    defaultValues: userEditDefaultValues,
+  const form = useForm<ComponentFormValues>({
+    resolver: zodResolver(componentFormSchema),
+    defaultValues: componentFormDefaultValues,
+    values: component
+      ? {
+          code: component.componentCode,
+          name: component.componentName,
+          category: component.category,
+          description: component.description ?? "",
+        }
+      : undefined,
   });
 
-  useEffect(() => {
-    if (user) {
-      form.reset({
-        username: user.username,
-        password: "",
-        role: user.role,
-        isActive: user.isActive,
-      });
-    }
-  }, [user, form]);
-
-  const handleSubmit = async (values: UserFormValues) => {
+  const handleSubmit = async (values: ComponentFormValues) => {
     if (!id) return;
 
     try {
       await updateMutation.mutateAsync({
         id,
         data: {
-          username: values.username,
-          role: values.role,
-          isActive: values.isActive,
-          ...(values.password ? { password: values.password } : {}),
+          componentCode: values.code,
+          componentName: values.name,
+          category: values.category,
+          description: values.description || undefined,
         },
       });
-      navigate("/master-data/user");
+      navigate("/master-data/component");
     } catch (error) {
       handleError(error);
     }
@@ -69,11 +65,12 @@ export function UserEditView() {
     if (error instanceof ApiError) return;
 
     if (error instanceof AxiosError) {
-      const apiError = ApiError.fromAxiosError(error);
+      const apiError =
+        error instanceof ApiError ? error : ApiError.fromAxiosError(error);
 
       if (apiError.isValidationError && apiError.errors) {
         Object.entries(apiError.errors).forEach(([field, messages]) => {
-          form.setError(field as keyof UserFormValues, {
+          form.setError(field as keyof ComponentFormValues, {
             type: "server",
             message: messages[0],
           });
@@ -85,10 +82,10 @@ export function UserEditView() {
   };
 
   const handleCancel = () => {
-    navigate("/master-data/user");
+    navigate("/master-data/component");
   };
 
-  if (isLoadingUser) {
+  if (isLoadingComponent) {
     return (
       <div className="flex h-[400px] items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
@@ -104,24 +101,24 @@ export function UserEditView() {
         </Button>
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">
-            Edit Pengguna
+            Edit Komponen
           </h1>
           <p className="text-sm text-muted-foreground">
-            Perbarui informasi akun pengguna
+            Perbarui informasi komponen karoseri
           </p>
         </div>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Edit Pengguna</CardTitle>
+          <CardTitle>Informasi Komponen</CardTitle>
           <CardDescription>
-            Ubah informasi pengguna. Kosongkan field password jika tidak ingin
-            mengubahnya.
+            Ubah detail komponen. Field bertanda{" "}
+            <span className="text-destructive">*</span> wajib diisi.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <UserForm
+          <KaroseriComponentForm
             form={form}
             onSubmit={handleSubmit}
             onCancel={handleCancel}

@@ -68,12 +68,12 @@ export const columns = getColumns<PredictionResponse>([
   },
 ]);
 
-export const actions = ({ onView, onDelete }: PredictionActionHandlers) =>
+export const actions = ({ onDetail, onDelete }: PredictionActionHandlers) =>
   getActions<PredictionResponse>([
     {
-      label: "View",
+      label: "Detail",
       icon: <Eye className="h-4 w-4" />,
-      onClick: onView,
+      onClick: onDetail,
     },
     {
       label: "Delete",

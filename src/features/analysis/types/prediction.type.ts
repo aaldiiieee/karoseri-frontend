@@ -86,6 +86,6 @@ export interface ModelStatus {
 
 // Action handlers for data table
 export interface PredictionActionHandlers {
-  onView: (item: PredictionResponse) => void;
+  onDetail: (item: PredictionResponse) => void;
   onDelete: (item: PredictionResponse) => void;
 }

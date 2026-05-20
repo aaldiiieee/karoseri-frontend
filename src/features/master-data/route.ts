@@ -3,6 +3,7 @@ import { MainLayout } from "@/shared/layouts/MainLayout";
 import {
   KaroseriComponentListView,
   KaroseriComponentAddView,
+  KaroseriComponentEditView,
   DamageRecordListView,
   DamageRecordAddView,
   DamageRecordEditView,
@@ -21,6 +22,10 @@ export const MasterDataRoutes: RouteObject[] = [
       {
         path: "component/add",
         Component: KaroseriComponentAddView,
+      },
+      {
+        path: "component/:id",
+        Component: KaroseriComponentEditView,
       },
       // Damage record routes
       {

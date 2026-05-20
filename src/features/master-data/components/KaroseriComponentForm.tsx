@@ -125,7 +125,6 @@ function CategoryField({ form }: FieldProps) {
           </FormLabel>
           <Select
             onValueChange={field.onChange}
-            defaultValue={field.value}
             value={field.value}
           >
             <FormControl>

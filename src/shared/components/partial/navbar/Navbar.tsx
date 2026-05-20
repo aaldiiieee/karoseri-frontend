@@ -20,10 +20,6 @@ export const Navbar = ({ onMenuClick }: NavbarProps) => {
         >
           <Menu className="h-6 w-6" />
         </button>
-
-        <span className="text-lg font-semibold">
-          Klasifikasi Kerusakan Komponen
-        </span>
       </div>
 
       <Link to="/dashboard" className="md:hidden">

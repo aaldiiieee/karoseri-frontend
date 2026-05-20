@@ -35,6 +35,7 @@ export function DataTable<T>({
 
   return (
     <div className="space-y-4">
+      <h1 className="text-2xl font-bold">{title}</h1>
       <div className="flex justify-between items-center gap-3">
         <Breadcrumb>
           <BreadcrumbList>

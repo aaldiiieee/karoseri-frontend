@@ -3,7 +3,7 @@ import { z } from "zod";
 const baseSchema = z.object({
   username: z.string().min(3, { message: "Username minimal 3 karakter" }),
   password: z.string().optional().or(z.literal("")),
-  role: z.enum(["superadmin", "technician"] as const),
+  role: z.enum(["admin", "technician"] as const),
   isActive: z.boolean(),
 });
 

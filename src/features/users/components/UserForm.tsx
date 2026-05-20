@@ -98,7 +98,7 @@ export function UserForm({
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="superadmin">Superadmin</SelectItem>
+                  <SelectItem value="admin">Admin</SelectItem>
                   <SelectItem value="technician">Teknisi</SelectItem>
                 </SelectContent>
               </Select>

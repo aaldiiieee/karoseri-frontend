@@ -1,12 +1,23 @@
+import { useNavigate } from "react-router";
 import { DataTable } from "@/shared/components/DataTable";
-import { usePredictionHistory } from "../hooks/usePrediction";
 import {
-  columns,
-  actions,
-} from "../components/PredictionHistoryColumns";
+  useDeletePrediction,
+  usePredictionHistory,
+} from "../hooks/usePrediction";
+import { columns, actions } from "../components/PredictionHistoryColumns";
+import { usePaginationParams } from "@/shared/hooks";
 
 export const PredictionHistoryView = () => {
-  const { data, isLoading } = usePredictionHistory();
+  const navigate = useNavigate();
+  const deleteData = useDeletePrediction();
+  const { page, size, setPage, setSize } = usePaginationParams();
+  const { data, isLoading } = usePredictionHistory({ page, size });
+
+  const handleDelete = async (id: string) => {
+    if (confirm("Apakah Anda yakin ingin menghapus data ini?")) {
+      await deleteData.mutateAsync(id);
+    }
+  };
 
   return (
     <DataTable
@@ -14,11 +25,21 @@ export const PredictionHistoryView = () => {
       columns={columns}
       keyExtractor={(item) => item.id}
       actions={actions({
-        onView: (item) => console.log("View prediction:", item.id),
-        onDelete: (item) => console.log("Delete prediction:", item.id),
+        onDetail: (item) => navigate(`/analysis/${item.id}`),
+        onDelete: (item) => handleDelete(item.id),
       })}
       isLoading={isLoading}
-      title="Riwayat Prediksi"
+      title="Klasifikasi Kerusakan"
+      navigateToAdd="/analysis/add"
+      // extraActions={handleTrainModel()}
+      pagination={{
+        page: data?.page ?? 1,
+        size: data?.size ?? 10,
+        total: data?.total ?? 0,
+        totalPages: data?.pages ?? 0,
+        onPageChange: setPage,
+        onSizeChange: setSize,
+      }}
     />
   );
 };

@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosError } from "axios";
-import { Sparkles } from "lucide-react";
-
+import { ArrowLeft, Sparkles } from "lucide-react";
+import { useNavigate } from "react-router";
 import { ApiError } from "@/shared/lib/api/error";
 import {
   predictionFormSchema,
@@ -14,10 +14,12 @@ import { usePredict, useModelStatus } from "../hooks/usePrediction";
 import { PredictionForm } from "../components/PredictionForm";
 import { PredictionResultCard } from "../components/PredictionResultCard";
 import type { PredictionResult } from "../types/prediction.type";
+import { Button } from "@/shared/components/ui/button";
 
 export function AnalysisView() {
   const [result, setResult] = useState<PredictionResult | null>(null);
   const [serverError, setServerError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const form = useForm<PredictionFormValues>({
     resolver: zodResolver(predictionFormSchema),
@@ -41,6 +43,10 @@ export function AnalysisView() {
     }
   };
 
+  const handleCancel = () => {
+    navigate("/analysis");
+  }
+
   const handleError = (error: unknown) => {
     if (error instanceof AxiosError) {
       const apiError = ApiError.fromAxiosError(error);
@@ -63,12 +69,12 @@ export function AnalysisView() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-start gap-3">
-        <div className="rounded-xl bg-primary/10 p-2.5">
-          <Sparkles className="h-6 w-6 text-primary" />
-        </div>
+        <Button variant="ghost" size="icon" onClick={handleCancel}>
+          <ArrowLeft className="h-5 w-5" />
+        </Button>
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground">
-            Analisis Kerusakan
+            Klasifikasi Kerusakan
           </h1>
           <p className="mt-1 text-muted-foreground">
             Masukkan parameter kerusakan untuk mendapatkan prediksi tingkat

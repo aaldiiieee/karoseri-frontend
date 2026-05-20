@@ -4,13 +4,13 @@ import { getColumns, getActions } from "@/shared/utils/dataTable.util";
 import type { User, UserActionHandlers } from "../types/user.type";
 
 const ROLE_BADGE: Record<string, string> = {
-  superadmin:
+  admin:
     "bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400",
   technician: "bg-sky-100 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400",
 };
 
 const ROLE_LABEL: Record<string, string> = {
-  superadmin: "Superadmin",
+  admin: "Admin",
   technician: "Teknisi",
 };
 

@@ -10,7 +10,7 @@ export const UserListView = () => {
   const deleteMutation = useDeleteUser();
 
   const handleDelete = async (item: User) => {
-    if (confirm("Apakah Anda yakin ingin menghapus pengguna ini?")) {
+    if (confirm("Apakah Anda yakin ingin menghapus user ini?")) {
       await deleteMutation.mutateAsync(item.id);
     }
   };
@@ -21,12 +21,12 @@ export const UserListView = () => {
       columns={columns}
       keyExtractor={(item) => item.id}
       actions={actions({
-        onEdit: (item) => navigate(`/settings/team/${item.id}`),
+        onEdit: (item) => navigate(`/master-data/user/${item.id}`),
         onDelete: handleDelete,
       })}
       isLoading={isLoading}
-      title="Pengguna"
-      navigateToAdd="/settings/team/add"
+      title="User"
+      navigateToAdd="/master-data/user/add"
     />
   );
 };

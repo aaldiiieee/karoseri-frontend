@@ -39,7 +39,7 @@ export function UserCreateView() {
         password: values.password ?? "",
         role: values.role,
       });
-      navigate("/settings/team");
+      navigate("/master-data/user");
     } catch (error) {
       handleError(error);
     }
@@ -65,7 +65,7 @@ export function UserCreateView() {
   };
 
   const handleCancel = () => {
-    navigate("/settings/team");
+    navigate("/master-data/user");
   };
 
   return (

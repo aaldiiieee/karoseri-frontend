@@ -4,7 +4,7 @@ import { MainLayout } from "@/shared/layouts/MainLayout";
 
 export const UserRoutes: RouteObject[] = [
   {
-    path: "settings/team",
+    path: "/master-data/user",
     Component: MainLayout,
     children: [
       {
