@@ -48,7 +48,7 @@ export const sidebarNav: NavGroup[] = [
     title: "Analisis",
     items: [
       {
-        title: "Klasifikasi Kerusakan",
+        title: "Klasifikasi",
         href: "/analysis",
         icon: Sparkles,
         roles: ["admin", "technician"],

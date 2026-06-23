@@ -76,19 +76,19 @@ export function UserCreateView() {
         </Button>
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">
-            Tambah Pengguna
+            Tambah User
           </h1>
           <p className="text-sm text-muted-foreground">
-            Buat akun pengguna baru untuk mengakses sistem
+            Buat akun user baru untuk mengakses sistem
           </p>
         </div>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Formulir Pengguna</CardTitle>
+          <CardTitle>Formulir User</CardTitle>
           <CardDescription>
-            Lengkapi informasi pengguna baru. Password minimal 6 karakter.
+            Lengkapi informasi user baru. Password minimal 6 karakter.
           </CardDescription>
         </CardHeader>
         <CardContent>

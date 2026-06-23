@@ -193,7 +193,7 @@ function FormActions({ isLoading, isEditMode, onCancel }: FormActionsProps) {
         ) : (
           <>
             <Save className="mr-2 h-4 w-4" />
-            {isEditMode ? "Simpan Perubahan" : "Simpan Komponen"}
+            {isEditMode ? "Simpan" : "Tambah"}
           </>
         )}
       </Button>

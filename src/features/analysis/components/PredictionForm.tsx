@@ -180,12 +180,12 @@ export function PredictionForm({
           {isLoading ? (
             <>
               <Loader2 className="h-4 w-4 animate-spin" />
-              Menganalisis...
+              Menambahkan...
             </>
           ) : (
             <>
               <Zap className="h-4 w-4" />
-              Prediksi Kerusakan
+              Tambah
             </>
           )}
         </Button>

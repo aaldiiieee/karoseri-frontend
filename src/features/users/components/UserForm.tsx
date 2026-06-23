@@ -144,7 +144,7 @@ export function UserForm({
             ) : (
               <>
                 <Save className="mr-2 h-4 w-4" />
-                {isEditMode ? "Simpan Perubahan" : "Simpan Data"}
+                {isEditMode ? "Simpan" : "Tambah"}
               </>
             )}
           </Button>

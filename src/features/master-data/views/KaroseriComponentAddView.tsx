@@ -81,7 +81,7 @@ export function KaroseriComponentAddView() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Informasi Komponen</CardTitle>
+          <CardTitle>Formulir Komponen</CardTitle>
           <CardDescription>
             Lengkapi data komponen dengan benar. Field bertanda{" "}
             <span className="text-destructive">*</span> wajib diisi.

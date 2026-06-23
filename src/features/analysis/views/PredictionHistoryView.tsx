@@ -29,7 +29,7 @@ export const PredictionHistoryView = () => {
         onDelete: (item) => handleDelete(item.id),
       })}
       isLoading={isLoading}
-      title="Klasifikasi Kerusakan"
+      title="Klasifikasi"
       navigateToAdd="/analysis/add"
       // extraActions={handleTrainModel()}
       pagination={{

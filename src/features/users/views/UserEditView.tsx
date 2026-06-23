@@ -104,19 +104,19 @@ export function UserEditView() {
         </Button>
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">
-            Edit Pengguna
+            Edit User
           </h1>
           <p className="text-sm text-muted-foreground">
-            Perbarui informasi akun pengguna
+            Perbarui informasi akun user
           </p>
         </div>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Edit Pengguna</CardTitle>
+          <CardTitle>Edit User</CardTitle>
           <CardDescription>
-            Ubah informasi pengguna. Kosongkan field password jika tidak ingin
+            Ubah informasi user. Kosongkan field password jika tidak ingin
             mengubahnya.
           </CardDescription>
         </CardHeader>

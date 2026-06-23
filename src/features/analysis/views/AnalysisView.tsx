@@ -74,7 +74,7 @@ export function AnalysisView() {
         </Button>
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-foreground">
-            Klasifikasi Kerusakan
+            Tambah Klasifikasi
           </h1>
           <p className="mt-1 text-muted-foreground">
             Masukkan parameter kerusakan untuk mendapatkan prediksi tingkat

@@ -111,7 +111,7 @@ export function KaroseriComponentEditView() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Informasi Komponen</CardTitle>
+          <CardTitle>Edit Komponen</CardTitle>
           <CardDescription>
             Ubah detail komponen. Field bertanda{" "}
             <span className="text-destructive">*</span> wajib diisi.
