@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router";
-// import { Upload } from "lucide-react";
+import { Upload } from "lucide-react";
 import { DataTable } from "@/shared/components/DataTable";
 import { useComponents, useDeleteComponent, useBulkImportComponent } from "../hooks/useKaroseriComponent";
 import { columns, actions } from "../components/KaroseriComponentColums";
 import { DatasetImportDialog } from "../components/DatasetImportDialog";
-// import { Button } from "@/shared/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { karoseriComponentService } from "../services/karoseriComponent.service";
 import { usePaginationParams } from "@/shared/hooks";
 import { useState } from "react";
@@ -38,16 +38,16 @@ export const KaroseriComponentListView = () => {
         isLoading={isLoading}
         navigateToAdd="/master-data/component/add"
         title="Komponen"
-        // extraActions={
-        //   <Button
-        //     variant="outline"
-        //     className="gap-2"
-        //     onClick={() => setImportOpen(true)}
-        //   >
-        //     <Upload className="h-4 w-4" />
-        //     Import Komponen
-        //   </Button>
-        // }
+        extraActions={
+          <Button
+            variant="outline"
+            className="gap-2"
+            onClick={() => setImportOpen(true)}
+          >
+            <Upload className="h-4 w-4" />
+            Import Komponen
+          </Button>
+        }
         pagination={{
           page: data?.page ?? 1,
           size: data?.size ?? 10,

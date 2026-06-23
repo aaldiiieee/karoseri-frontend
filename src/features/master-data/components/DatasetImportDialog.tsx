@@ -7,7 +7,7 @@ import {
   AlertTriangle,
   Download,
   Loader2,
-  // FileUp,
+  FileUp,
 } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
 import { Button } from "@/shared/components/ui/button";
@@ -21,7 +21,7 @@ interface ImportResult {
 interface DatasetImportDialogProps {
   open: boolean;
   onClose: () => void;
-  // title?: string;
+  title?: string;
   onImport: (file: File) => Promise<ImportResult>;
   onDownloadTemplate: () => Promise<void>;
 }
@@ -31,7 +31,7 @@ type ImportPhase = "idle" | "uploading" | "done";
 export function DatasetImportDialog({
   open,
   onClose,
-  // title = "Import Dataset",
+  title = "Import Dataset",
   onImport,
   onDownloadTemplate,
 }: DatasetImportDialogProps) {
@@ -121,7 +121,7 @@ export function DatasetImportDialog({
       {/* Dialog */}
       <div className="relative w-full max-w-lg rounded-2xl border bg-card shadow-2xl animate-in fade-in zoom-in-95 slide-in-from-bottom-4 duration-300">
         {/* Header */}
-        {/* <div className="flex items-center justify-between border-b px-6 py-4">
+        <div className="flex items-center justify-between border-b px-6 py-4">
           <div className="flex items-center gap-3">
             <div className="rounded-xl bg-primary/10 p-2">
               <FileUp className="h-5 w-5 text-primary" />
@@ -141,7 +141,7 @@ export function DatasetImportDialog({
           >
             <X className="h-5 w-5" />
           </button>
-        </div> */}
+        </div>
 
         {/* Body */}
         <div className="px-6 py-5 space-y-5">
