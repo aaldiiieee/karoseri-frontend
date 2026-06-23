@@ -4,7 +4,6 @@ import {
   Users,
   LayoutDashboard,
   Sparkles,
-  Brain,
   // Brain,
 } from "lucide-react";
 import type { NavGroup } from "./types";
@@ -54,12 +53,12 @@ export const sidebarNav: NavGroup[] = [
         icon: Sparkles,
         roles: ["admin", "technician"],
       },
-      {
-        title: "Model & Pelatihan",
-        href: "/analysis/reports",
-        icon: Brain,
-        roles: ["admin"],
-      },
+      // {
+      //   title: "Model & Pelatihan",
+      //   href: "/analysis/reports",
+      //   icon: Brain,
+      //   roles: ["admin"],
+      // },
     ],
   },
 ];
