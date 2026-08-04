@@ -22,6 +22,13 @@ import {
 } from "@/shared/components/ui/form";
 import type { PredictionFormValues } from "../schema/predictionForm.schema";
 import { useComponents } from "@/features/master-data/hooks/useKaroseriComponent";
+import type { ComponentFilters } from "@/features/master-data/types/karoseriComponent.type";
+import { useState } from "react";
+import {
+  CORROSION_LEVELS,
+  USAGE_FREQUENCY_LEVELS,
+  type ScaleLevel,
+} from "../constants";
 
 interface PredictionFormProps {
   form: UseFormReturn<PredictionFormValues>;
@@ -36,7 +43,11 @@ export function PredictionForm({
   isLoading = false,
   isModelTrained = true,
 }: PredictionFormProps) {
-  const { data: components } = useComponents();
+  const [filters] = useState<ComponentFilters>({
+    size: 30,
+  });
+
+  const { data } = useComponents(filters);
 
   return (
     <Form {...form}>
@@ -57,7 +68,7 @@ export function PredictionForm({
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {components?.items.map((comp) => (
+                  {data?.items.map((comp) => (
                     <SelectItem key={comp.id} value={comp.id}>
                       {comp.componentCode} — {comp.componentName}
                     </SelectItem>
@@ -73,7 +84,9 @@ export function PredictionForm({
           {/* Section: Physical Dimensions */}
           <div className="space-y-4">
             <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground/80">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100 text-xs text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">1</span>
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-100 text-xs text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
+                1
+              </span>
               Dimensi Kerusakan
             </h3>
             <div className="grid gap-4 sm:grid-cols-2">
@@ -116,7 +129,9 @@ export function PredictionForm({
           {/* Section: Usage & Condition */}
           <div className="space-y-4">
             <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground/80">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-purple-100 text-xs text-purple-600 dark:bg-purple-900/30 dark:text-purple-400">2</span>
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-purple-100 text-xs text-purple-600 dark:bg-purple-900/30 dark:text-purple-400">
+                2
+              </span>
               Kondisi & Penggunaan
             </h3>
             <div className="grid gap-4 sm:grid-cols-2">
@@ -129,23 +144,23 @@ export function PredictionForm({
                 required
                 isInteger
               />
-              <NumberField
+              <ScaleField
                 form={form}
                 name="usageFrequency"
                 label="Frekuensi Pakai"
-                placeholder="1-10"
-                description="1 (jarang) - 10 (sering)"
+                placeholder="Pilih frekuensi pakai"
+                hint="Rata-rata hari operasi kendaraan per bulan"
+                levels={USAGE_FREQUENCY_LEVELS}
                 required
-                isInteger
               />
-              <NumberField
+              <ScaleField
                 form={form}
                 name="corrosionLevel"
                 label="Level Korosi"
-                placeholder="1-5"
-                description="1 (min) - 5 (parah)"
+                placeholder="Pilih level korosi"
+                hint="Seberapa dalam karat sudah memakan pelat"
+                levels={CORROSION_LEVELS}
                 required
-                isInteger
               />
             </div>
           </div>
@@ -200,6 +215,64 @@ export function PredictionForm({
   );
 }
 
+// Reusable field for 1-N rating scales with a description per level
+function ScaleField({
+  form,
+  name,
+  label,
+  placeholder,
+  hint,
+  levels,
+  required,
+}: {
+  form: UseFormReturn<PredictionFormValues>;
+  name: keyof PredictionFormValues;
+  label: string;
+  placeholder: string;
+  hint: string;
+  levels: ScaleLevel[];
+  required?: boolean;
+}) {
+  return (
+    <FormField
+      control={form.control}
+      name={name}
+      render={({ field }) => {
+        const selected = levels.find((level) => level.value === field.value);
+
+        return (
+          <FormItem>
+            <FormLabel>
+              {label} {required && <span className="text-destructive">*</span>}
+            </FormLabel>
+            <Select
+              value={field.value ? String(field.value) : ""}
+              onValueChange={(val) => field.onChange(Number(val))}
+            >
+              <FormControl>
+                <SelectTrigger>
+                  <SelectValue placeholder={placeholder} />
+                </SelectTrigger>
+              </FormControl>
+              <SelectContent>
+                {levels.map((level) => (
+                  <SelectItem key={level.value} value={String(level.value)}>
+                    {level.value} — {level.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <FormDescription>
+              {selected ? selected.description : hint}
+            </FormDescription>
+            <FormMessage />
+          </FormItem>
+        );
+      }}
+    />
+  );
+}
+
 // Reusable number field
 function NumberField({
   form,
@@ -236,7 +309,7 @@ function NumberField({
               onChange={(e) => {
                 const val = e.target.value;
                 field.onChange(
-                  val === "" ? 0 : isInteger ? parseInt(val) : parseFloat(val)
+                  val === "" ? 0 : isInteger ? parseInt(val) : parseFloat(val),
                 );
               }}
             />
